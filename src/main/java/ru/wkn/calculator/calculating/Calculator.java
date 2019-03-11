@@ -1,9 +1,21 @@
 package ru.wkn.calculator.calculating;
 
+/**
+ * The class of a basic arithmetic operations.
+ * @author Pikalov Artem.
+ */
+
 public class Calculator {
 
+    /**
+     * The field containing rounding accuracy for floating point operations.
+     */
     private int roundingAccuracy;
 
+    /**
+     * Constructs an {@code Calculator} with the rounding accuracy value.
+     * @param roundingAccuracy - value of the rounding accuracy.
+     */
     public Calculator(int roundingAccuracy) {
         setRoundingAccuracy(roundingAccuracy);
     }
