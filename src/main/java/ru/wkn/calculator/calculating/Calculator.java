@@ -12,7 +12,7 @@ public class Calculator {
     private int roundingAccuracy;
 
     /**
-     * Constructs an {@code Calculator} with the rounding accuracy value.
+     * Initializes a newly created {@code Calculator} object with the rounding accuracy value.
      *
      * @param roundingAccuracy - value of the rounding accuracy
      */
@@ -97,7 +97,7 @@ public class Calculator {
      * @param value - value for root operation
      * @param degree - degree for root operation
      * @return {@link Calculator#round(double)} - rounded value of root operation
-     * @throws ArithmeticException if the root is calculated from a negative number
+     * @throws ArithmeticException if there is a root calculate from a negative number
      */
     public double root(double value, double degree) throws ArithmeticException {
         if (value < 0 && degree % 2 == 0) {
