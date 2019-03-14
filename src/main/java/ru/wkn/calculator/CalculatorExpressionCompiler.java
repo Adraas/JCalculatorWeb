@@ -56,7 +56,7 @@ public class CalculatorExpressionCompiler {
         stringExpression.setFirstOperand(firstOperand);
         stringExpression.setSecondOperand(secondOperand);
         stringExpression.setOperator(currentOperator);
-        firstOperand.setValueByString(stringExpression.getAnswerAsString());
+        firstOperand.setNumberAsString(stringExpression.getAnswerAsString());
         secondOperand = new StringNumber();
     }
 
