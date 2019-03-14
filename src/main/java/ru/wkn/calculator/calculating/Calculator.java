@@ -4,7 +4,6 @@ package ru.wkn.calculator.calculating;
  * The class of a basic arithmetic operations.
  * @author Pikalov Artem.
  */
-
 public class Calculator {
 
     /**
