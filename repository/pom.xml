@@ -15,4 +15,12 @@
     <name>Repository</name>
     <description>The ORM model for work with database</description>
 
+    <dependencies>
+        <dependency>
+            <groupId>ru.wkn</groupId>
+            <artifactId>entities</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>
