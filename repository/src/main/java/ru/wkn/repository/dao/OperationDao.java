@@ -1,41 +1,41 @@
 package ru.wkn.repository.dao;
 
 import ru.wkn.entities.Operation;
+import ru.wkn.repository.GeneralDao;
 import ru.wkn.repository.IDao;
-import ru.wkn.repository.dao.h2.H2Dao;
 
 import java.util.List;
 
 public class OperationDao implements IDao<Operation, Integer> {
 
-    private H2Dao<Operation, Integer> h2Dao;
+    private GeneralDao<Operation, Integer> generalDao;
 
-    public OperationDao(H2Dao<Operation, Integer> h2Dao) {
-        this.h2Dao = h2Dao;
+    public OperationDao(GeneralDao<Operation, Integer> generalDao) {
+        this.generalDao = generalDao;
     }
 
     @Override
     public void create(Operation newOperation) {
-        h2Dao.create(newOperation);
+        generalDao.create(newOperation);
     }
 
     @Override
     public Operation read(Integer index) {
-        return h2Dao.read(index);
+        return generalDao.read(index);
     }
 
     @Override
     public void update(Operation transientOperation) {
-        h2Dao.update(transientOperation);
+        generalDao.update(transientOperation);
     }
 
     @Override
     public void delete(Operation transientOperation) {
-        h2Dao.delete(transientOperation);
+        generalDao.delete(transientOperation);
     }
 
     @Override
     public List<Operation> getAll() {
-        return h2Dao.getAll("operation");
+        return generalDao.getAll("operation");
     }
 }

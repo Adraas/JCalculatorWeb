@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class H2Dao<V, I> implements GeneralDao {
+public class H2Dao<V, I> implements GeneralDao<V, I> {
 
     private Class<V> vClass;
     private Session session;
@@ -20,6 +20,7 @@ public class H2Dao<V, I> implements GeneralDao {
         this.session = session;
     }
 
+    @Override
     public void create(V newInstance) {
         Transaction transaction = null;
         try {
@@ -31,10 +32,12 @@ public class H2Dao<V, I> implements GeneralDao {
         }
     }
 
+    @Override
     public V read(I index) {
         return (V) session.get(vClass, (Serializable) index);
     }
 
+    @Override
     public void update(V transientInstance) {
         Transaction transaction = null;
         try {
@@ -46,6 +49,7 @@ public class H2Dao<V, I> implements GeneralDao {
         }
     }
 
+    @Override
     public void delete(V transientInstance) {
         Transaction transaction = null;
         try {
@@ -57,6 +61,7 @@ public class H2Dao<V, I> implements GeneralDao {
         }
     }
 
+    @Override
     public List<V> getAll(String table) {
         List<V> vList;
         Query query = session.createQuery("SELECT * FROM ".concat(table));

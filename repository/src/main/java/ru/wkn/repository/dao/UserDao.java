@@ -1,41 +1,41 @@
 package ru.wkn.repository.dao;
 
 import ru.wkn.entities.User;
+import ru.wkn.repository.GeneralDao;
 import ru.wkn.repository.IDao;
-import ru.wkn.repository.dao.h2.H2Dao;
 
 import java.util.List;
 
 public class UserDao implements IDao<User, Integer> {
 
-    private H2Dao<User, Integer> h2Dao;
+    private GeneralDao<User, Integer> generalDao;
 
-    public UserDao(H2Dao<User, Integer> h2Dao) {
-        this.h2Dao = h2Dao;
+    public UserDao(GeneralDao<User, Integer> generalDao) {
+        this.generalDao = generalDao;
     }
 
     @Override
     public void create(User newUser) {
-        h2Dao.create(newUser);
+        generalDao.create(newUser);
     }
 
     @Override
     public User read(Integer index) {
-        return h2Dao.read(index);
+        return generalDao.read(index);
     }
 
     @Override
     public void update(User transientUser) {
-        h2Dao.update(transientUser);
+        generalDao.update(transientUser);
     }
 
     @Override
     public void delete(User transientUser) {
-        h2Dao.delete(transientUser);
+        generalDao.delete(transientUser);
     }
 
     @Override
     public List<User> getAll() {
-        return h2Dao.getAll("user");
+        return generalDao.getAll("user");
     }
 }
