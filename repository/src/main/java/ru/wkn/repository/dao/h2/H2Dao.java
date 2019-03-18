@@ -1,69 +1,66 @@
-package ru.wkn.repository.h2;
+package ru.wkn.repository.dao.h2;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import ru.wkn.entities.User;
-import ru.wkn.repository.IDao;
+import ru.wkn.repository.GeneralDao;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class H2UserDao implements IDao<User, Integer> {
+public class H2Dao<V, I> implements GeneralDao {
 
+    private Class<V> vClass;
     private Session session;
 
-    public H2UserDao(Session session) {
+    public H2Dao(Class<V> vClass, Session session) {
+        this.vClass = vClass;
         this.session = session;
     }
 
-    @Override
-    public void create(User newUser) {
+    public void create(V newInstance) {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.save(newUser);
+            session.save(newInstance);
             transaction.commit();
         } catch (HibernateException e) {
             Objects.requireNonNull(transaction).rollback();
         }
     }
 
-    @Override
-    public User read(Integer index) {
-        return (User) session.get(User.class, index);
+    public V read(I index) {
+        return (V) session.get(vClass, (Serializable) index);
     }
 
-    @Override
-    public void update(User transientUser) {
+    public void update(V transientInstance) {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(transientUser);
+            session.update(transientInstance);
             transaction.commit();
         } catch (HibernateException e) {
             Objects.requireNonNull(transaction).rollback();
         }
     }
 
-    @Override
-    public void delete(User transientUser) {
+    public void delete(V transientInstance) {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.delete(transientUser);
+            session.delete(transientInstance);
             transaction.commit();
         } catch (HibernateException e) {
             Objects.requireNonNull(transaction).rollback();
         }
     }
 
-    @Override
-    public List<User> getAll() {
-        List<User> vList;
-        Query query = session.createQuery("SELECT * FROM user");
-        vList = (List<User>) query.list();
+    public List<V> getAll(String table) {
+        List<V> vList;
+        Query query = session.createQuery("SELECT * FROM ".concat(table));
+        vList = (List<V>) query.list();
         return vList;
     }
 }
