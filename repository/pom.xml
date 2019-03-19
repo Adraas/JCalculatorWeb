@@ -34,6 +34,18 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.4.1.Final</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jcache -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jcache</artifactId>
+            <version>5.4.1.Final</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.ehcache/ehcache -->
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>3.7.0</version>
+        </dependency>
     </dependencies>
 
 </project>
