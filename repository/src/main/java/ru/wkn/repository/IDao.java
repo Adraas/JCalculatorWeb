@@ -12,5 +12,5 @@ public interface IDao<V, I> {
 
     void delete(V transientInstance);
 
-    List<V> getAll();
+    List<V> getAll(String table);
 }

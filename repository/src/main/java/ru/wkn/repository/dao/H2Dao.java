@@ -1,22 +1,22 @@
-package ru.wkn.repository.dao.h2;
+package ru.wkn.repository.dao;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import ru.wkn.repository.GeneralDao;
+import ru.wkn.repository.IDao;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class H2Dao<V, I> implements GeneralDao<V, I> {
+public class H2Dao<V, I> implements IDao<V, I> {
 
-    private Class<V> vClass;
+    private Class<V> entityClass;
     private Session session;
 
-    public H2Dao(Class<V> vClass, Session session) {
-        this.vClass = vClass;
+    public H2Dao(Class<V> entityClass, Session session) {
+        this.entityClass = entityClass;
         this.session = session;
     }
 
@@ -34,7 +34,7 @@ public class H2Dao<V, I> implements GeneralDao<V, I> {
 
     @Override
     public V read(I index) {
-        return (V) session.get(vClass, (Serializable) index);
+        return (V) session.get(entityClass, (Serializable) index);
     }
 
     @Override
