@@ -1,5 +1,6 @@
 package ru.wkn.entities;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Objects;
 
+@Cacheable(value = false)
 @Entity(name = "Operation")
 @Table(name = "operation")
 public class Operation {
