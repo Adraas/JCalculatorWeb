@@ -34,7 +34,7 @@ public class Service<V, I> implements IService<V, I> {
     }
 
     @Override
-    public List<V> getAll(String table) {
-        return iDao.getAll(table);
+    public List<V> getAll() {
+        return iDao.getAll();
     }
 }
