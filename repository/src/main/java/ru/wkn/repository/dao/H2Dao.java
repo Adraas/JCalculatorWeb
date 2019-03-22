@@ -34,7 +34,7 @@ public class H2Dao<V, I> implements IDao<V, I> {
 
     @Override
     public V read(I index) {
-        return (V) session.get(entityClass, (Serializable) index);
+        return session.get(entityClass, (Serializable) index);
     }
 
     @Override
