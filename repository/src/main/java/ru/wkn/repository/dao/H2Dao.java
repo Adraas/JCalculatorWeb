@@ -1,7 +1,7 @@
 package ru.wkn.repository.dao;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import ru.wkn.repository.IDao;
