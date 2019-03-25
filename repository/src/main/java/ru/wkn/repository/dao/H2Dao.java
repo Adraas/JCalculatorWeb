@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class H2Dao<V, I> implements IDao<V, I> {
+public class H2Dao<V, I extends Serializable> implements IDao<V, I> {
 
     private Class<V> entityClass;
     private Session session;
@@ -35,7 +35,7 @@ public class H2Dao<V, I> implements IDao<V, I> {
 
     @Override
     public V read(I index) {
-        return session.get(entityClass, (Serializable) index);
+        return session.get(entityClass, index);
     }
 
     @Override
