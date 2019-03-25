@@ -65,18 +65,13 @@ public class H2Dao<V, I extends Serializable> implements IDao<V, I> {
     @Override
     public List<V> getAll() {
         List<V> vList;
-        Query query = null;
-        try {
-            query = session.createQuery("SELECT * FROM ".concat(getTableName()));
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        Query query = session.createQuery("SELECT * FROM ".concat(getTableName()));
         vList = (List<V>) query.list();
         return vList;
     }
 
-    private String getTableName() throws ClassNotFoundException {
-        Table tableAnnotation = entityClass.getAnnotation((Class<Table>) Class.forName("javax.persistence.Table"));
+    private String getTableName() {
+        Table tableAnnotation = entityClass.getAnnotation(Table.class);
         return tableAnnotation.name();
     }
 }
