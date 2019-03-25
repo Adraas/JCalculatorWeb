@@ -1,17 +1,18 @@
 package ru.wkn.jpa;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class HibernateUtil {
 
-    private static final SessionFactory sessionFactory;
+    private static final String PERSISTENCE_UNIT = "h2_entity_manager";
+    private static final EntityManagerFactory ENTITY_MANAGER_FACTORY;
 
     static {
-        sessionFactory = new Configuration().configure().buildSessionFactory();
+        ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
     }
 
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
+    public static EntityManagerFactory getEntityManagerFactory() {
+        return ENTITY_MANAGER_FACTORY;
     }
 }

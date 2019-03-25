@@ -1,5 +1,6 @@
 package ru.wkn;
 
+import org.hibernate.Session;
 import ru.wkn.jpa.HibernateUtil;
 import ru.wkn.repository.DaoFactory;
 import ru.wkn.repository.IDao;
@@ -7,7 +8,10 @@ import ru.wkn.repository.IDaoFactory;
 import ru.wkn.repository.IService;
 import ru.wkn.repository.service.Service;
 
-public class RepositoryFacade<V, I> {
+import javax.persistence.EntityManager;
+import java.io.Serializable;
+
+public class RepositoryFacade<V, I extends Serializable> {
 
     private Class<IDao<V, I>> daoClass;
     private Class<V> entityClass;
@@ -21,7 +25,8 @@ public class RepositoryFacade<V, I> {
     }
 
     private void initService() {
-        IDao<V, I> dao = daoFactory.createDao(daoClass, entityClass, HibernateUtil.getSessionFactory().openSession());
+        EntityManager entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+        IDao<V, I> dao = daoFactory.createDao(daoClass, entityClass, (Session) entityManager.getDelegate());
         service = new Service<>(dao);
     }
 
