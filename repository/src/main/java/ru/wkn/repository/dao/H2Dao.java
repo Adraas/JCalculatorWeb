@@ -74,4 +74,11 @@ public class H2Dao<V, I extends Serializable> implements IDao<V, I> {
         Table tableAnnotation = entityClass.getAnnotation(Table.class);
         return tableAnnotation.name();
     }
+
+    @Override
+    public void finalize() {
+        if (session.isOpen()) {
+            session.close();
+        }
+    }
 }
