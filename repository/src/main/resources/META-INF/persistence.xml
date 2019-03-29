@@ -23,7 +23,7 @@
             <property name="connection.pool_size" value="1"/>
 
             <!-- SQL dialect -->
-            <property name="dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 
             <!-- EHCache configuration for second-level cache -->
             <property name="hibernate.cache.use_second_level_cache" value="true"/>
