@@ -11,7 +11,7 @@
         <p><input id="login" name="login" placeholder="Логин" size="40" type="text"></p>
         <p><input id="password" name="password" placeholder="Пароль" size="40" type="password"></p>
         <p><input name="sign_in" type="submit" value="Вход"
-                  onclick="Entrance.submitValues(['login', 'password'], 'sign_in_form', 'post', '/calculator/sign_in')">
+                  onclick="Entrance.submitValues(['login', 'password'], 'sign_in_form', 'post', 'calculator/sign_in')">
         </p>
     </form>
 </div>
