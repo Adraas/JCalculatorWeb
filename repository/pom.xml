@@ -34,17 +34,17 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>5.4.1.Final</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jcache -->
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-ehcache -->
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jcache</artifactId>
-            <version>5.4.1.Final</version>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>5.4.2.Final</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.ehcache/ehcache -->
+        <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
         <dependency>
-            <groupId>org.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>3.7.0</version>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>3.3.1</version>
         </dependency>
     </dependencies>
 
