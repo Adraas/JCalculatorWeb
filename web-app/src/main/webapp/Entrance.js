@@ -17,4 +17,8 @@ class Entrance {
         }
         return true;
     }
+
+    static followTo(link) {
+        document.location.href = link;
+    }
 }
