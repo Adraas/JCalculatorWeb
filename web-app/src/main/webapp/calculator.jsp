@@ -7,7 +7,7 @@
     <title>Калькулятор</title>
 </head>
 <body>
-<form name="calc" class="wrapper" method="post" action="CalculatorServlet">
+<form name="calc" class="wrapper" method="post" action="/calculator/profile">
     <table class="main">
         <tr class="display">
             <td colspan="4"><label>

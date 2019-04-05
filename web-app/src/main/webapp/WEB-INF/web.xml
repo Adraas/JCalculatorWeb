@@ -5,4 +5,34 @@
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+
+    <servlet>
+        <servlet-name>sign_in</servlet-name>
+        <servlet-class>ru.wkn.servlets.SignInServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>sign_in</servlet-name>
+        <url-pattern>/calculator/sign_in</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>sign_up</servlet-name>
+        <servlet-class>ru.wkn.servlets.SignUpServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>sign_up</servlet-name>
+        <url-pattern>/calculator/sign_up</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>calculator</servlet-name>
+        <servlet-class>ru.wkn.servlets.CalculatorServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>calculator</servlet-name>
+        <url-pattern>/calculator/profile</url-pattern>
+    </servlet-mapping>
 </web-app>
