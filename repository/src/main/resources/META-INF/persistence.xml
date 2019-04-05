@@ -10,14 +10,15 @@
         <class>ru.wkn.entities.User</class>
         <class>ru.wkn.entities.Operation</class>
 
-        <properties>
-            <!-- Database connection settings -->
-            <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:h2:tcp://localhost/~/j_calculator_web"/>
-            <property name="hibernate.connection.username" value="user"/>
-            <property name="hibernate.connection.password" value="user"/>
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 
-            <property name="hibernate.default_schema" value="PUBLIC"/>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/j_calculator_web"/>
+            <property name="javax.persistence.jdbc.user" value="user"/>
+            <property name="javax.persistence.jdbc.password" value="user"/>
+
+            <property name="hibernate.default_schema" value="JCalculatorWeb"/>
 
             <!-- JDBC connection pool -->
             <property name="connection.pool_size" value="1"/>
