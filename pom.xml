@@ -26,7 +26,6 @@
     <modules>
         <module>calculator</module>
         <module>repository</module>
-        <module>entities</module>
         <module>web-app</module>
     </modules>
 

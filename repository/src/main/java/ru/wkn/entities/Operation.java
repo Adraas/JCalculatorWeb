@@ -1,6 +1,7 @@
 package ru.wkn.entities;
 
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Cacheable(value = false)
-@Entity(name = "Operation")
+@Entity
 @Table(name = "operation")
 public class Operation {
 
@@ -26,7 +27,7 @@ public class Operation {
     @Column(name = "operation_result", nullable = false)
     private String operationResult;
 
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, optional = false)
     @Column(name = "cookie", nullable = false, insertable = false, updatable = false)
     private String cookie;
 
