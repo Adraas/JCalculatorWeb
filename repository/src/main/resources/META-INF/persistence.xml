@@ -18,7 +18,7 @@
             <property name="javax.persistence.jdbc.user" value="user"/>
             <property name="javax.persistence.jdbc.password" value="user"/>
 
-            <property name="hibernate.default_schema" value="JCalculatorWeb"/>
+            <property name="hibernate.default_schema" value="J_CALCULATOR_WEB"/>
 
             <!-- JDBC connection pool -->
             <property name="hibernate.connection.provider_class"

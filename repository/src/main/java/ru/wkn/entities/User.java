@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Cacheable
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "J_CALCULATOR_WEB")
 public class User {
 
     @Id
@@ -28,7 +28,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = " cookie", unique = true, nullable = false)
+    @Column(name = "cookie", unique = true, nullable = false)
     private String cookie;
 
     public User() {

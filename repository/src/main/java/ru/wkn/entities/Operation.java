@@ -1,19 +1,19 @@
 package ru.wkn.entities;
 
 import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import java.util.Objects;
 
 @Cacheable(value = false)
 @Entity
-@Table(name = "operation")
+@Table(name = "operation", schema = "J_CALCULATOR_WEB")
 public class Operation {
 
     @Id
@@ -27,8 +27,16 @@ public class Operation {
     @Column(name = "operation_result", nullable = false)
     private String operationResult;
 
-    @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, optional = false)
-    @Column(name = "cookie", nullable = false, insertable = false, updatable = false)
+    @JoinTable(
+            name = "user",
+            joinColumns = @JoinColumn(
+                    name = "cookie",
+                    referencedColumnName = "cookie",
+                    nullable = false,
+                    updatable = false),
+            schema = "J_CALCULATOR_WEB"
+    )
+    @Column(name = "cookie")
     private String cookie;
 
     public Operation() {
@@ -62,6 +70,10 @@ public class Operation {
 
     public String getCookie() {
         return cookie;
+    }
+
+    public void setCookie(String cookie) {
+        this.cookie = cookie;
     }
 
     @Override
