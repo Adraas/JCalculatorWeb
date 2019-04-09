@@ -3,9 +3,10 @@ package ru.wkn.repository.service;
 import ru.wkn.repository.IDao;
 import ru.wkn.repository.IService;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Service<V, I> implements IService<V, I> {
+public class Service<V, I extends Serializable> implements IService<V, I> {
 
     private IDao<V, I> iDao;
 
@@ -36,5 +37,10 @@ public class Service<V, I> implements IService<V, I> {
     @Override
     public List<V> getAll() {
         return iDao.getAll();
+    }
+
+    @Override
+    public IDao<V, I> getDao() {
+        return iDao;
     }
 }

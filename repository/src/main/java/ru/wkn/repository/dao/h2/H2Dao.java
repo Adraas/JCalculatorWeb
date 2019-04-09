@@ -1,4 +1,4 @@
-package ru.wkn.repository.dao;
+package ru.wkn.repository.dao.h2;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -80,5 +80,13 @@ public class H2Dao<V, I extends Serializable> implements IDao<V, I> {
         if (session.isOpen()) {
             session.close();
         }
+    }
+
+    public Class<V> getEntityClass() {
+        return entityClass;
+    }
+
+    public Session getSession() {
+        return session;
     }
 }
