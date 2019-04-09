@@ -45,6 +45,6 @@
         </tr>
     </table>
 </form>
-<p><a href='index.jsp'>Отмена</a></p>
+<p><a href='sign_in.jsp'>Выход</a></p>
 </body>
 </html>

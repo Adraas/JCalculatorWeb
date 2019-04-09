@@ -3,7 +3,7 @@ class Entrance {
     static submitValues(elements, form) {
         if (Entrance.isCorrect(elements)) {
             document.getElementById(form).method = "POST";
-            document.getElementById(form).action = "/calculator/sign_in.jsp";
+            document.getElementById(form).action = "calculator/sign_in";
         }
     }
 

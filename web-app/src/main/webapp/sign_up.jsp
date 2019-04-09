@@ -12,10 +12,10 @@
         <p><input id="password" name="password" placeholder="Пароль" size="40" type="password"></p>
         <p><input name="sign_up" type="submit" value="Регистрация"
                   onclick="Entrance.submitValues(['login', 'password'], 'sign_in_form');
-                  Entrance.followTo('/calculator/sign_in.jsp')">
+                  Entrance.followTo('calculator/sign_in')">
         </p>
     </form>
 </div>
-<p><a href='index.jsp'>Отмена</a></p>
+<p><a href='sign_in.jsp'>Отмена</a></p>
 </body>
 </html>
