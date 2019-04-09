@@ -17,6 +17,16 @@
     <description>The web representation of this application</description>
 
     <dependencies>
+        <dependency>
+            <groupId>ru.wkn</groupId>
+            <artifactId>repository</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.wkn</groupId>
+            <artifactId>calculator</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
