@@ -4,7 +4,7 @@ class Calculator {
         let data = "symbol=" + symbol;
         let xmlHttp = new XMLHttpRequest();
 
-        xmlHttp.open("POST", "calculator/profile", true);
+        xmlHttp.open("POST", "/calculator/profile.jsp", true);
         xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
         xmlHttp.send(data);
 

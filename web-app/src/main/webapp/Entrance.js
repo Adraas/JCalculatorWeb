@@ -1,9 +1,9 @@
 class Entrance {
 
-    static submitValues(elements, form, method, action) {
+    static submitValues(elements, form) {
         if (Entrance.isCorrect(elements)) {
-            document.getElementById(form).method = method;
-            document.getElementById(form).action = action;
+            document.getElementById(form).method = "POST";
+            document.getElementById(form).action = "/calculator/sign_in.jsp";
         }
     }
 
