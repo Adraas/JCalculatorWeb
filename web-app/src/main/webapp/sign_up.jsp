@@ -10,9 +10,8 @@
         <p><input name="full_name" placeholder="ФИО" size="40" type="text"></p>
         <p><input id="login" name="login" placeholder="Логин" size="40" type="text"></p>
         <p><input id="password" name="password" placeholder="Пароль" size="40" type="password"></p>
-        <p><input name="sign_up" type="submit" value="Регистрация"
-                  onclick="Entrance.submitValues(['login', 'password'], 'sign_in_form');
-                  Entrance.followTo('calculator/sign_in')">
+        <p><input name="sign_up" type="button" value="Регистрация"
+                  onclick="Entrance.submitValues('login', 'password', 'calculator/sign_up')">
         </p>
     </form>
 </div>

@@ -29,7 +29,7 @@ public class SignInServlet extends HttpServlet {
             resp.addCookie(new Cookie("user", user.getCookie()));
             req.getRequestDispatcher("/calculator/profile.jsp").forward(req, resp);
         } else {
-            resp.getWriter().println("User not found!");
+            resp.sendError(412, "User not found!");
         }
     }
 }

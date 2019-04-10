@@ -10,16 +10,17 @@ class Calculator {
 
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState === XMLHttpRequest.DONE) {
-                if (xmlHttp.status === 200) {
+                let status = xmlHttp.status;
+                if (status >= 200 && status < 300) {
                     let response = xmlHttp.responseText;
                     if (isNaN(response)) {
                         alert(response);
                         document.getElementById("display").value = "";
                     } else {
-                        document.getElementById("display").value = xmlHttp.responseText;
+                        document.getElementById("display").value = response;
                     }
                 } else {
-                    alert(String(xmlHttp.status).concat(": ", xmlHttp.statusText));
+                    alert(String(status).concat(": ", xmlHttp.statusText));
                 }
             }
         };
