@@ -1,12 +1,12 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <script rel="script" type="text/javascript" src="js/Entrance.js"></script>
     <title>Регистрация</title>
-    <script rel="script" type="text/javascript" src="Entrance.js"></script>
 </head>
 <body>
 <div style="text-align: center;">
-    <form id="sign_up_form" name="sign_up_form">
+    <form name="sign_up_form">
         <p><input name="full_name" placeholder="ФИО" size="40" type="text"></p>
         <p><input id="login" name="login" placeholder="Логин" size="40" type="text"></p>
         <p><input id="password" name="password" placeholder="Пароль" size="40" type="password"></p>

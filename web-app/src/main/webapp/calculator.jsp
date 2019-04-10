@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <script rel="script" type="text/javascript" src="Calculator.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/calculator.css"/>
+    <script rel="script" type="text/javascript" src="js/Calculator.js"></script>
     <title>Калькулятор</title>
 </head>
 <body>

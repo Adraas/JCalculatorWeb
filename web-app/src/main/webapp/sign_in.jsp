@@ -1,12 +1,12 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Вход</title>
-    <script rel="script" type="text/javascript" src="Entrance.js"></script>
+    <script rel="script" type="text/javascript" src="js/Entrance.js"></script>
+    <title>Авторизация</title>
 </head>
 <body>
 <div style="text-align: center;">
-    <form id="sign_in_form" name="sign_in_form">
+    <form name="sign_in_form">
         <p>Войти или <a href="sign_up.jsp">зарегистрироваться</a></p>
         <p><input id="login" name="login" placeholder="Логин" size="40" type="text"></p>
         <p><input id="password" name="password" placeholder="Пароль" size="40" type="password"></p>
