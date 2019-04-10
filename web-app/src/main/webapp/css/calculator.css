@@ -1,15 +1,22 @@
+body {
+	background: #a9ebc1;
+	display: flex;
+	align-items: center;
+	height: 50vh;
+}
 .wrapper {
+	background: #ffd500;
 	margin: 0 auto;
 	overflow: hidden;
 	width: 250px;
-	height: 340px;
+	height: 360px;
 	border-radius: 10px;
 	border: 1px solid #949493;
 	box-shadow: 3px 3px 7px #000;
 }
 .main {
-    margin: 5px auto 0;
-    width: 220px;
+	margin: 5px auto 0;
+	width: 220px;
 }
 .display input {
 	background: #ccc;

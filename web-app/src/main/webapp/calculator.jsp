@@ -7,11 +7,11 @@
     <title>Калькулятор</title>
 </head>
 <body>
-<form name="calc" class="wrapper">
+<form class="wrapper">
     <table class="main">
         <tr class="display">
             <td colspan="4"><label>
-                <input id="display" type="text" name="input">
+                <input id="display" type="text">
             </label></td>
         </tr>
         <tr class="buttons">
@@ -44,7 +44,7 @@
             <td><input type="button" value="^" onclick="Calculator.postRequestToCalculator('^')"></td>
         </tr>
     </table>
+    <p align="center"><a href='sign_in.jsp'>Выход</a></p>
 </form>
-<p><a href='sign_in.jsp'>Выход</a></p>
 </body>
 </html>

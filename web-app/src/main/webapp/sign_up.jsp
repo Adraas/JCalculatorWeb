@@ -1,20 +1,31 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/entrance.css" type="text/css"/>
     <script rel="script" type="text/javascript" src="js/Entrance.js"></script>
     <title>Регистрация</title>
 </head>
 <body>
-<div style="text-align: center;">
-    <form name="sign_up_form">
-        <p><input id="full_name" name="full_name" placeholder="ФИО" size="40" type="text"></p>
-        <p><input id="login" name="login" placeholder="Логин" size="40" type="text"></p>
-        <p><input id="password" name="password" placeholder="Пароль" size="40" type="password"></p>
-        <p><input name="sign_up" type="button" value="Регистрация"
-                  onclick="Entrance.signUp('full_name', 'login', 'password')">
-        </p>
+<div class="form-wrap">
+    <div class="profile"><img src="fonts/profile-image.png">
+        <h1>Регистрация</h1>
+    </div>
+    <form>
+        <div>
+            <label for="full_name">ФИО</label>
+            <input id="full_name" type="text" required>
+        </div>
+        <div>
+            <label for="login">Логин</label>
+            <input id="login" type="text" required>
+        </div>
+        <div>
+            <label for="password">Пароль</label>
+            <input id="password" type="password" required>
+        </div>
+        <button onclick="Entrance.signUp('full_name', 'login', 'password')">Добавление</button>
+        <p align="center"><a href="sign_in.jsp">Назад</a></p>
     </form>
 </div>
-<p><a href='sign_in.jsp'>Назад</a></p>
 </body>
 </html>
