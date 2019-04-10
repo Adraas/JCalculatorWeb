@@ -20,7 +20,7 @@
             <input id="password" type="password" required>
         </div>
         <button name="sign_in"
-                onclick="Entrance.submitValues('login', 'password', 'calculator/sign_in')">Вход
+                onclick="Entrance.signIn('login', 'password')">Вход
         </button>
         <p align="center"><a href="sign_up.jsp">Регистрация</a></p>
     </form>

@@ -7,14 +7,14 @@
 <body>
 <div style="text-align: center;">
     <form name="sign_up_form">
-        <p><input name="full_name" placeholder="ФИО" size="40" type="text"></p>
+        <p><input id="full_name" name="full_name" placeholder="ФИО" size="40" type="text"></p>
         <p><input id="login" name="login" placeholder="Логин" size="40" type="text"></p>
         <p><input id="password" name="password" placeholder="Пароль" size="40" type="password"></p>
         <p><input name="sign_up" type="button" value="Регистрация"
-                  onclick="Entrance.submitValues('login', 'password', 'calculator/sign_up')">
+                  onclick="Entrance.signUp('full_name', 'login', 'password')">
         </p>
     </form>
 </div>
-<p><a href='sign_in.jsp'>Отмена</a></p>
+<p><a href='sign_in.jsp'>Назад</a></p>
 </body>
 </html>
