@@ -1,7 +1,14 @@
 class Calculator {
 
-    static postRequestToCalculator(symbol) {
-        let data = "symbol=" + symbol;
+    static isNew = true;
+
+    static postRequestToCalculator(symbol, roundingAccuracyElement) {
+        let userCookie = this.readCookie("name");
+        let isNew = String(this.isNew);
+        this.isNew = false;
+        let roundingAccuracy = document.getElementById(roundingAccuracyElement).value;
+        let data = "cookie=" + userCookie + "&is_new=" + isNew
+            + "&rounding_accuracy" + roundingAccuracy + "&symbol=" + symbol;
         let xmlHttp = new XMLHttpRequest();
 
         xmlHttp.open("POST", "calculator/profile", true);
@@ -24,5 +31,20 @@ class Calculator {
                 }
             }
         };
+    }
+
+    static readCookie(name) {
+        let name_cook = name + "=";
+        let spl = document.cookie.split(";");
+        for (let i = 0; i < spl.length; i++) {
+            let c = spl[i];
+            while (c.charAt(0) === " ") {
+                c = c.substring(1, c.length);
+            }
+            if (c.indexOf(name_cook) === 0) {
+                return c.substring(name_cook.length, c.length);
+            }
+        }
+        return null;
     }
 }
