@@ -19,4 +19,11 @@ public class UserH2Dao extends H2Dao<User, Integer> {
         query.setParameter("password", password);
         return (User) query.getResultList().get(0);
     }
+
+    public boolean isExistCookie(String cookie) {
+        Query query = super.getSession()
+                .createSQLQuery("SELECT cookie FROM user WHERE cookie = :cookie");
+        query.setParameter("cookie", cookie);
+        return query.getResultList().size() != 0;
+    }
 }

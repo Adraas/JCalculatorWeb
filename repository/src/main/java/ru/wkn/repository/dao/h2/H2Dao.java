@@ -22,7 +22,7 @@ public class H2Dao<V, I extends Serializable> implements IDao<V, I> {
     }
 
     @Override
-    public void create(V newInstance) {
+    public boolean create(V newInstance) {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
@@ -30,7 +30,9 @@ public class H2Dao<V, I extends Serializable> implements IDao<V, I> {
             transaction.commit();
         } catch (HibernateException e) {
             Objects.requireNonNull(transaction).rollback();
+            return false;
         }
+        return true;
     }
 
     @Override

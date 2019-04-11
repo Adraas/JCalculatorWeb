@@ -15,8 +15,8 @@ public class Service<V, I extends Serializable> implements IService<V, I> {
     }
 
     @Override
-    public void create(V newInstance) {
-        iDao.create(newInstance);
+    public boolean create(V newInstance) {
+        return iDao.create(newInstance);
     }
 
     @Override

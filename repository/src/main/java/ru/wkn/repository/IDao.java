@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface IDao<V, I extends Serializable> {
 
-    void create(V newInstance);
+    boolean create(V newInstance);
 
     V read(I index);
 
