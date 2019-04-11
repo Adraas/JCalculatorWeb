@@ -33,7 +33,7 @@ public class CalculatorServlet extends HttpServlet {
             }
             req.setAttribute("result", result);
             req.getRequestDispatcher("/calculator/calculator.jsp").forward(req, resp);
-            if (!saveOperation(expression.split("=")[0], result, cookie)) {
+            if (cookie == null || !saveOperation(expression.split("=")[0], result, cookie)) {
                 resp.sendError(412, "Operation not created!");
             }
         }
