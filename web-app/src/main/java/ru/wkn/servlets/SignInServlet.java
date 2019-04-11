@@ -16,14 +16,10 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Class h2DaoClass = H2Dao.class;
-        Class userClass = User.class;
-        RepositoryFacade<User, Integer> repositoryFacade = new RepositoryFacade<>(h2DaoClass, userClass);
-
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        User user = ((UserService) repositoryFacade.getService()).logIn(login, password);
 
+        User user = getUser(login, password);
         resp.setContentType("text/html");
         if (user != null) {
             resp.addCookie(new Cookie("user", user.getCookie()));
@@ -31,5 +27,12 @@ public class SignInServlet extends HttpServlet {
         } else {
             resp.sendError(412, "User not found!");
         }
+    }
+
+    private User getUser(String login, String password) {
+        Class<H2Dao> h2DaoClass = H2Dao.class;
+        Class<User> userClass = User.class;
+        RepositoryFacade<User, Integer> repositoryFacade = new RepositoryFacade(h2DaoClass, userClass);
+        return ((UserService) repositoryFacade.getService()).logIn(login, password);
     }
 }

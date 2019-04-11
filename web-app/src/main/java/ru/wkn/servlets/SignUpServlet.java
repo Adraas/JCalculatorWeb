@@ -15,22 +15,25 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Class h2DaoClass = H2Dao.class;
-        Class userClass = User.class;
-        RepositoryFacade<User, Integer> repositoryFacade = new RepositoryFacade<>(h2DaoClass, userClass);
-
         String fullName = req.getParameter("full_name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        String cookie = ((UserService) repositoryFacade.getService()).registryCookie(fullName, login, password);
 
-        User user = new User(fullName, login, password, cookie);
-        boolean isCreate = repositoryFacade.getService().create(user);
-
-        if (isCreate) {
+        boolean isCreated = saveUser(fullName, login, password);
+        if (isCreated) {
             req.getRequestDispatcher("/calculator/sign_in.jsp").forward(req, resp);
         } else {
             resp.sendError(412, "User not created!");
         }
+    }
+
+    private boolean saveUser(String fullName, String login, String password) {
+        Class<H2Dao> h2DaoClass = H2Dao.class;
+        Class<User> userClass = User.class;
+        RepositoryFacade<User, Integer> repositoryFacade = new RepositoryFacade(h2DaoClass, userClass);
+        String cookie = ((UserService) repositoryFacade.getService()).registryCookie(fullName, login, password);
+
+        User user = new User(fullName, login, password, cookie);
+        return repositoryFacade.getService().create(user);
     }
 }
