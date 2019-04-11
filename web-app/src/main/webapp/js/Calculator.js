@@ -1,19 +1,15 @@
 class Calculator {
 
-    static expression : String;
     static roundingAccuracy = 1;
 
     static setRange(roundingAccuracyElement) {
         this.roundingAccuracy = document.getElementById(roundingAccuracyElement).value;
     }
 
-    static checkAndSend(symbol) {
-    }
-
-    static postRequestToCalculator() {
+    static postRequestToCalculator(symbol) {
         let userCookie = this.readCookie("name");
         let roundingAccuracy = this.roundingAccuracy;
-        let data = "cookie=" + userCookie + "&rounding_accuracy" + roundingAccuracy + "&expression=" + this.expression;
+        let data = "cookie=" + userCookie + "&rounding_accuracy" + roundingAccuracy + "&symbol=" + symbol;
         let xmlHttp = new XMLHttpRequest();
 
         xmlHttp.open("POST", "calculator/profile", true);
