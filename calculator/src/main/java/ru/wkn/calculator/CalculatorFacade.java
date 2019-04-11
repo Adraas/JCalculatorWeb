@@ -7,6 +7,11 @@ public class CalculatorFacade {
     private Calculator calculator;
     private CalculatorExpressionCompiler calculatorExpressionCompiler;
 
+    public CalculatorFacade() {
+        calculator = new Calculator(1);
+        calculatorExpressionCompiler = new CalculatorExpressionCompiler(calculator);
+    }
+
     public CalculatorFacade(int roundingAccuracy) {
         calculator = new Calculator(roundingAccuracy);
         calculatorExpressionCompiler = new CalculatorExpressionCompiler(calculator);
