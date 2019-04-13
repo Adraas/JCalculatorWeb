@@ -30,9 +30,9 @@ class Entrance {
         xmlHttp.send(data);
 
         xmlHttp.onreadystatechange = function () {
-            let status = xmlHttp.status;
-            if (status >= 400) {
-                alert(String(status).concat(": ", xmlHttp.statusText));
+            let result = xmlHttp.getResponseHeader("result");
+            if (result != null || result !== "") {
+                alert(result);
             }
         };
     }

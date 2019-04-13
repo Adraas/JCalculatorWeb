@@ -20,7 +20,7 @@ class Calculator {
             if (xmlHttp.readyState === XMLHttpRequest.DONE) {
                 let status = xmlHttp.status;
                 if (status >= 200 && status < 300) {
-                    let response = xmlHttp.responseText;
+                    let response = xmlHttp.getResponseHeader("result");
                     if (isNaN(response)) {
                         alert(response);
                         document.getElementById("display").value = "";
