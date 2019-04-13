@@ -33,17 +33,34 @@ public class CalculatorServlet extends HttpServlet {
             calculatorExpressionCompiler.allClear();
             resp.setHeader("result", "0");
         } else {
+            updateCalculatorExpressionCompilerState(calculatorExpressionCompiler, operation);
             String result = calculatorExpressionCompiler.getCurrentAnswerAsString(symbol);
             boolean isSaved = false;
-            if (operationReady(operation)) {
+            if (operationReady(operation, result)) {
                 operation.setOperationResult(result);
                 isSaved = saveOperation(operation);
             }
-            resp.setHeader("result", "0");
+            resp.setHeader("result", result);
             if (isSaved) {
                 resp.sendError(412, "Operation not created!");
             }
-            req.getRequestDispatcher("/calculator/calculator.jsp").forward(req, resp);
+        }
+        req.getRequestDispatcher("/calculator/calculator.jsp").forward(req, resp);
+    }
+
+    private Operation getOperationByCookie(String cookie) {
+        if (cookieOperationMap.containsKey(cookie)) {
+            return cookieOperationMap.get(cookie);
+        } else {
+            return new Operation("", null, cookie);
+        }
+    }
+
+    private void updateCalculatorExpressionCompilerState(CalculatorExpressionCompiler calculatorExpressionCompiler,
+                                                         Operation operation) {
+        char[] expression = operation.getOperationContent().toCharArray();
+        for (char symbol : expression) {
+            calculatorExpressionCompiler.getCurrentAnswerAsString(symbol);
         }
     }
 
@@ -55,16 +72,7 @@ public class CalculatorServlet extends HttpServlet {
         return repositoryFacade.getService().create(operation);
     }
 
-    private Operation getOperationByCookie(String cookie) {
-        if (cookieOperationMap.containsKey(cookie)) {
-            return cookieOperationMap.get(cookie);
-        } else {
-            return new Operation("", null, cookie);
-        }
-    }
-
-    private boolean operationReady(Operation operation) {
-        //
-        return true;
+    private boolean operationReady(Operation operation, String intermediateResult) {
+        return !operation.getOperationContent().contains(intermediateResult);
     }
 }
