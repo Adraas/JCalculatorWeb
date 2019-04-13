@@ -22,11 +22,9 @@ public class UserService extends Service<User, Integer> {
         String codedMessage;
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            while (true) {
-                codedMessage = new String(messageDigest.digest(startMessage));
-                if (!((UserH2Dao) super.getDao()).isExistCookie(codedMessage)) {
-                    return codedMessage;
-                }
+            codedMessage = new String(messageDigest.digest(startMessage));
+            while (((UserH2Dao) super.getDao()).isExistCookie(codedMessage)) {
+                codedMessage = new String(messageDigest.digest(codedMessage.getBytes()));
             }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
