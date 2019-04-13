@@ -25,7 +25,8 @@ public class SignInServlet extends HttpServlet {
             resp.addCookie(new Cookie("user", user.getCookie()));
             req.getRequestDispatcher("/calculator/profile.jsp").forward(req, resp);
         } else {
-            resp.sendError(412, "User not found!");
+            resp.setHeader("result", "User not found!");
+            req.getRequestDispatcher("/calculator/sign_in.jsp").forward(req, resp);
         }
     }
 

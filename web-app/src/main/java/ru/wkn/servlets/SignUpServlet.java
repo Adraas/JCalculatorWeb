@@ -23,7 +23,8 @@ public class SignUpServlet extends HttpServlet {
         if (isCreated) {
             req.getRequestDispatcher("/calculator/sign_in.jsp").forward(req, resp);
         } else {
-            resp.sendError(412, "User not created!");
+            resp.setHeader("result", "User not created!");
+            req.getRequestDispatcher("/calculator/sign_up.jsp").forward(req, resp);
         }
     }
 
