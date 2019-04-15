@@ -1,8 +1,9 @@
 package ru.wkn.servlets;
 
 import ru.wkn.RepositoryFacade;
+import ru.wkn.entities.EntityType;
 import ru.wkn.entities.User;
-import ru.wkn.repository.dao.h2.H2Dao;
+import ru.wkn.repository.dao.DaoType;
 import ru.wkn.repository.service.UserService;
 
 import javax.servlet.ServletException;
@@ -31,9 +32,7 @@ public class SignInServlet extends HttpServlet {
     }
 
     private User getUser(String login, String password) {
-        Class<H2Dao> h2DaoClass = H2Dao.class;
-        Class<User> userClass = User.class;
-        RepositoryFacade<User, Integer> repositoryFacade = new RepositoryFacade(h2DaoClass, userClass);
+        RepositoryFacade repositoryFacade = new RepositoryFacade(DaoType.H2DAO, EntityType.USER);
         return ((UserService) repositoryFacade.getService()).logIn(login, password);
     }
 }

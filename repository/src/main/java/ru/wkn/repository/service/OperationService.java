@@ -1,7 +1,7 @@
 package ru.wkn.repository.service;
 
 import ru.wkn.entities.Operation;
-import ru.wkn.repository.IDao;
+import ru.wkn.repository.dao.IDao;
 
 public class OperationService extends Service<Operation, Integer> {
 

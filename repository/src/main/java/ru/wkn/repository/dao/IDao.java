@@ -1,4 +1,4 @@
-package ru.wkn.repository;
+package ru.wkn.repository.dao;
 
 import java.util.List;
 
@@ -13,4 +13,6 @@ public interface IDao<V, I> {
     void delete(V transientInstance);
 
     List<V> getAll();
+
+    Class<V> getEntityClass();
 }

@@ -1,9 +1,10 @@
-package ru.wkn.repository;
+package ru.wkn.repository.service;
 
-import java.io.Serializable;
+import ru.wkn.repository.dao.IDao;
+
 import java.util.List;
 
-public interface IService<V, I extends Serializable> {
+public interface IService<V, I> {
 
     boolean create(V newInstance);
 

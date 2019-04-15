@@ -3,8 +3,9 @@ package ru.wkn.servlets;
 import ru.wkn.RepositoryFacade;
 import ru.wkn.calculator.CalculatorExpressionCompiler;
 import ru.wkn.calculator.CalculatorFacade;
+import ru.wkn.entities.EntityType;
 import ru.wkn.entities.Operation;
-import ru.wkn.repository.dao.h2.H2Dao;
+import ru.wkn.repository.dao.DaoType;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -66,9 +67,7 @@ public class CalculatorServlet extends HttpServlet {
 
     private boolean saveOperation(Operation operation) {
         cookieOperationMap.remove(operation.getCookie());
-        Class<H2Dao> h2DaoClass = H2Dao.class;
-        Class<Operation> operationClass = Operation.class;
-        RepositoryFacade<Operation, Integer> repositoryFacade = new RepositoryFacade(h2DaoClass, operationClass);
+        RepositoryFacade repositoryFacade = new RepositoryFacade(DaoType.H2DAO, EntityType.OPERATION);
         return repositoryFacade.getService().create(operation);
     }
 

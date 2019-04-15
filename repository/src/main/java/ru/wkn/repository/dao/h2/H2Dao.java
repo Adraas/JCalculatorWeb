@@ -4,7 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import ru.wkn.repository.IDao;
+import ru.wkn.repository.dao.IDao;
 
 import javax.persistence.Table;
 import java.util.List;

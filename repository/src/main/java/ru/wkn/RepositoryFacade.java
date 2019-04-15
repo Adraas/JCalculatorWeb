@@ -1,46 +1,49 @@
 package ru.wkn;
 
 import org.hibernate.Session;
+import ru.wkn.entities.EntityType;
 import ru.wkn.jpa.HibernateUtil;
-import ru.wkn.repository.DaoFactory;
-import ru.wkn.repository.IDao;
-import ru.wkn.repository.IDaoFactory;
-import ru.wkn.repository.IService;
-import ru.wkn.repository.service.Service;
+import ru.wkn.repository.dao.DaoFactory;
+import ru.wkn.repository.dao.DaoType;
+import ru.wkn.repository.dao.IDao;
+import ru.wkn.repository.dao.IDaoFactory;
+import ru.wkn.repository.service.IService;
+import ru.wkn.repository.service.IServiceFactory;
+import ru.wkn.repository.service.ServiceFactory;
 
 import javax.persistence.EntityManager;
-import java.io.Serializable;
 
-public class RepositoryFacade<V, I extends Serializable> {
+public class RepositoryFacade {
 
-    private Class<IDao<V, I>> daoClass;
-    private Class<V> entityClass;
-    private final IDaoFactory<V, I> daoFactory = new DaoFactory<>();
-    private IService<V, I> service;
+    private DaoType daoType;
+    private EntityType entityType;
+    private final IDaoFactory daoFactory = new DaoFactory();
+    private final IServiceFactory serviceFactory = new ServiceFactory();
+    private IService service;
 
-    public RepositoryFacade(Class<IDao<V, I>> daoClass, Class<V> entityClass) {
-        this.daoClass = daoClass;
-        this.entityClass = entityClass;
+    public RepositoryFacade(DaoType daoType, EntityType entityType) {
+        this.daoType = daoType;
+        this.entityType = entityType;
         initService();
     }
 
     private void initService() {
         EntityManager entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
-        IDao<V, I> dao = daoFactory.createDao(daoClass, entityClass, (Session) entityManager.getDelegate());
-        service = new Service<>(dao);
+        IDao dao = daoFactory.createDao(daoType, entityType, (Session) entityManager.getDelegate());
+        service = serviceFactory.createService(dao);
     }
 
-    public void setDaoClass(Class<IDao<V, I>> daoClass) {
-        this.daoClass = daoClass;
+    public void setDaoType(DaoType daoType) {
+        this.daoType = daoType;
         initService();
     }
 
-    public void setEntityClass(Class<V> entityClass) {
-        this.entityClass = entityClass;
+    public void setEntityType(EntityType entityType) {
+        this.entityType = entityType;
         initService();
     }
 
-    public IService<V, I> getService() {
+    public IService getService() {
         return service;
     }
 }

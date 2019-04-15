@@ -1,7 +1,7 @@
 package ru.wkn.repository.service;
 
 import ru.wkn.entities.User;
-import ru.wkn.repository.IDao;
+import ru.wkn.repository.dao.IDao;
 import ru.wkn.repository.dao.h2.UserH2Dao;
 
 import java.security.MessageDigest;
