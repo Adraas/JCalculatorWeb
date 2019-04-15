@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import java.util.Objects;
 
@@ -25,6 +27,15 @@ public class Operation {
     @Column(name = "operation_result", nullable = false)
     private String operationResult;
 
+    @JoinTable(
+            name = "user",
+            joinColumns = @JoinColumn(
+                    name = "cookie",
+                    referencedColumnName = "cookie",
+                    nullable = false,
+                    updatable = false),
+            schema = "J_CALCULATOR_WEB"
+    )
     @Column(name = "cookie")
     private String cookie;
 
