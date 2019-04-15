@@ -7,9 +7,7 @@ import ru.wkn.repository.dao.h2.H2Dao;
 import ru.wkn.repository.dao.h2.OperationH2Dao;
 import ru.wkn.repository.dao.h2.UserH2Dao;
 
-import java.io.Serializable;
-
-public class DaoFactory<V, I extends Serializable> implements IDaoFactory<V, I> {
+public class DaoFactory<V, I> implements IDaoFactory<V, I> {
 
     @Override
     public IDao createDao(Class<IDao<V, I>> daoClass, Class<V> entityClass, Session session) {

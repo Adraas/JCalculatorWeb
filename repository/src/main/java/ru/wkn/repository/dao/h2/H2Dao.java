@@ -7,12 +7,11 @@ import org.hibernate.query.Query;
 import ru.wkn.repository.IDao;
 
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-public class H2Dao<V, I extends Serializable> implements IDao<V, I> {
+public class H2Dao<V, I> implements IDao<V, I> {
 
     private Class<V> entityClass;
     private Session session;

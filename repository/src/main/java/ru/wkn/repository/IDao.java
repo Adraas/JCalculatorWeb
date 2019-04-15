@@ -1,9 +1,8 @@
 package ru.wkn.repository;
 
-import java.io.Serializable;
 import java.util.List;
 
-public interface IDao<V, I extends Serializable> {
+public interface IDao<V, I> {
 
     boolean create(V newInstance);
 

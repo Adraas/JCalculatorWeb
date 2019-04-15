@@ -14,7 +14,7 @@ public class UserH2Dao extends H2Dao<User, Integer> {
 
     public User logIn(String login, String password) {
         Query query = super.getSession()
-                .createSQLQuery("SELECT * FROM user WHERE login = :login AND password = :password");
+                .createQuery("SELECT * FROM user WHERE login = :login AND password = :password");
         query.setParameter("login", login);
         query.setParameter("password", password);
         return (User) query.getResultList().get(0);
@@ -22,7 +22,7 @@ public class UserH2Dao extends H2Dao<User, Integer> {
 
     public boolean isExistCookie(String cookie) {
         Query query = super.getSession()
-                .createSQLQuery("SELECT cookie FROM user WHERE cookie = :cookie");
+                .createQuery("SELECT cookie FROM user WHERE cookie = :cookie");
         query.setParameter("cookie", cookie);
         return query.getResultList().size() != 0;
     }
