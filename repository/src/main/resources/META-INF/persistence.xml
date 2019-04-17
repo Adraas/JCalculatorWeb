@@ -17,8 +17,8 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 
             <!-- DB Schema -->
-            <property name="hibernate.default_catalog" value="J_CALCULATOR_WEB"/>
-            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <property name="hibernate.default_schema" value="J_CALCULATOR_WEB"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
 
             <!-- Hikari connection pool configuration -->
             <property name="hibernate.connection.provider_class"

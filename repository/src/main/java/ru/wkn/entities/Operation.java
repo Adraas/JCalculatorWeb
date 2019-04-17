@@ -13,7 +13,7 @@ import java.util.Objects;
 
 @Cacheable(value = false)
 @Entity
-@Table(name = "operation", schema = "J_CALCULATOR_WEB")
+@Table(name = "operation")
 public class Operation {
 
     @Id
@@ -33,8 +33,7 @@ public class Operation {
                     name = "cookie",
                     referencedColumnName = "cookie",
                     nullable = false,
-                    updatable = false),
-            schema = "J_CALCULATOR_WEB"
+                    updatable = false)
     )
     @Column(name = "cookie")
     private String cookie;

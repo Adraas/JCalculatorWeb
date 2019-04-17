@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Cacheable
 @Entity
-@Table(name = "user", schema = "J_CALCULATOR_WEB")
+@Table(name = "user")
 public class User {
 
     @Id
