@@ -10,6 +10,8 @@
         <class>ru.wkn.entities.User</class>
         <class>ru.wkn.entities.Operation</class>
 
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+
         <properties>
             <!-- SQL dialect -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
@@ -22,6 +24,13 @@
             <property name="hibernate.connection.provider_class"
                       value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
             <property name="hibernate.hikari.maximumPoolSize" value="20"/>
+
+            <!-- EHCache configuration for second-level cache -->
+            <property name="hibernate.cache.use_second_level_cache" value="true"/>
+            <property name="hibernate.cache.region.factory_class"
+                      value="org.hibernate.cache.ehcache.internal.EhcacheRegionFactory"/>
+            <property name="hibernate.javax.cache.provider" value="org.ehcache.jsr107.EhcacheCachingProvider"/>
+            <property name="hibernate.cache.use_query_cache" value="true"/>
 
             <!-- Echo all executed SQL to stdout -->
             <property name="hibernate.show_sql" value="true"/>

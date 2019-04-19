@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 import ru.wkn.repository.dao.IDao;
 
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -39,7 +40,7 @@ public class H2Dao<V, I> implements IDao<V, I> {
 
     @Override
     public V read(I index) {
-        return session.get(entityClass, index);
+        return session.get(entityClass, (Serializable) index);
     }
 
     @Override
