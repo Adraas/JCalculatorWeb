@@ -17,7 +17,7 @@ import java.util.Objects;
 public class Operation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false, insertable = false, updatable = false)
     private long id;
 
