@@ -12,11 +12,11 @@ class Calculator {
         let data = "cookie=" + userCookie + "&rounding_accuracy" + roundingAccuracy + "&symbol=" + symbol;
         let xmlHttp = new XMLHttpRequest();
 
-        xmlHttp.open("POST", "calculator/profile", true);
+        xmlHttp.open("POST", "/calculator/profile", true);
         xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
         xmlHttp.send(data);
 
-        xmlHttp.onreadystatechange = function () {
+        xmlHttp.onload = function () {
             if (xmlHttp.readyState === XMLHttpRequest.DONE) {
                 let status = xmlHttp.status;
                 if (status >= 200 && status < 300) {

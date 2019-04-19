@@ -5,7 +5,7 @@ class Entrance {
             let login = document.getElementById(loginElement);
             let password = document.getElementById(passwordElement);
             let data = "login=" + login + "&password=" + password;
-            this.doRequest(data,"calculator/sign_in");
+            this.doRequest(data,"/calculator/sign_in");
         } else {
             alert("Проверьте данные!")
         }
@@ -17,7 +17,7 @@ class Entrance {
             let login = document.getElementById(loginElement);
             let password = document.getElementById(passwordElement);
             let data = "fullName=" + fullName + "&login=" + login + "&password=" + password;
-            this.doRequest(data,"calculator/sign_up");
+            this.doRequest(data,"/calculator/sign_up");
         } else {
             alert("Проверьте данные!")
         }
@@ -29,7 +29,7 @@ class Entrance {
         xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
         xmlHttp.send(data);
 
-        xmlHttp.onreadystatechange = function () {
+        xmlHttp.onload = function () {
             let result = xmlHttp.getResponseHeader("result");
             if (result != null || result !== "") {
                 alert(result);
