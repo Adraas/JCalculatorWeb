@@ -2,9 +2,10 @@ package ru.wkn.repository.service;
 
 import ru.wkn.repository.dao.IDao;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Service<V, I> implements IService<V, I> {
+public class Service<V, I extends Serializable> implements IService<V, I> {
 
     private IDao<V, I> iDao;
 
