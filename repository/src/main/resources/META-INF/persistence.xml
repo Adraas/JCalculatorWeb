@@ -23,14 +23,12 @@
             <!-- Hikari connection pool configuration -->
             <property name="hibernate.connection.provider_class"
                       value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
-            <property name="hibernate.hikari.maximumPoolSize" value="20"/>
+            <property name="hibernate.hikari.maximumPoolSize" value="6"/>
 
             <!-- EHCache configuration for second-level cache -->
             <property name="hibernate.cache.use_second_level_cache" value="true"/>
             <property name="hibernate.cache.region.factory_class"
-                      value="org.hibernate.cache.ehcache.internal.EhcacheRegionFactory"/>
-            <property name="hibernate.javax.cache.provider" value="org.ehcache.jsr107.EhcacheCachingProvider"/>
-            <property name="hibernate.cache.use_query_cache" value="true"/>
+                      value="org.hibernate.cache.jcache.JCacheRegionFactory"/>
 
             <!-- Echo all executed SQL to stdout -->
             <property name="hibernate.show_sql" value="true"/>
