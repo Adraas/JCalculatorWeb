@@ -20,13 +20,29 @@ public class SignUpServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        boolean isCreated = saveUser(fullName, login, password);
-        if (isCreated) {
-            req.getRequestDispatcher("/calculator/sign_in.jsp").forward(req, resp);
+        if (checkStringToValid(fullName, ',', ';', ':')
+                && checkStringToValid(login, ' ', ',', ';', ':')
+                && checkStringToValid(password, ' ', ',', ';', ':')) {
+            boolean isCreated = saveUser(fullName, login, password);
+            if (isCreated) {
+                req.getRequestDispatcher("/calculator/sign_in.jsp").forward(req, resp);
+            } else {
+                resp.setHeader("Result", "user_not_created");
+                req.getRequestDispatcher("/calculator/sign_up.jsp").forward(req, resp);
+            }
         } else {
-            resp.setHeader("result", "User not created!");
+            resp.setHeader("Result", "parameters_with_forbidden_symbols");
             req.getRequestDispatcher("/calculator/sign_up.jsp").forward(req, resp);
         }
+    }
+
+    private boolean checkStringToValid(String value, char... forbiddenSymbols) {
+        for (char forbiddenSymbol : forbiddenSymbols) {
+            if (value.contains(String.valueOf(forbiddenSymbol))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean saveUser(String fullName, String login, String password) {

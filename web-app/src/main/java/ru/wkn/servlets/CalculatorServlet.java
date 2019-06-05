@@ -32,7 +32,7 @@ public class CalculatorServlet extends HttpServlet {
 
         if (symbol == 'C') {
             calculatorExpressionCompiler.allClear();
-            resp.setHeader("result", "0");
+            resp.setHeader("Result", "0");
         } else {
             updateCalculatorExpressionCompilerState(calculatorExpressionCompiler, operation);
             String result = calculatorExpressionCompiler.getCurrentAnswerAsString(symbol);
@@ -41,7 +41,7 @@ public class CalculatorServlet extends HttpServlet {
                 operation.setOperationResult(result);
                 isSaved = saveOperation(operation);
             }
-            resp.setHeader("result", result);
+            resp.setHeader("Result", result);
             if (isSaved) {
                 resp.sendError(412, "Operation not created!");
             }

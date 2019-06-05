@@ -12,21 +12,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Base64;
+import java.util.Enumeration;
 
 public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+        Enumeration<String> authorizationHeaderData = req.getHeaders("Authorization");
+        String login = null;
+        String password = null;
+        if (authorizationHeaderData.hasMoreElements()) {
+            login = new String(Base64.getDecoder().decode(authorizationHeaderData.nextElement()));
+        }
+        if (authorizationHeaderData.hasMoreElements()) {
+            password = new String(Base64.getDecoder().decode(authorizationHeaderData.nextElement()));
+        }
 
-        User user = getUser(login, password);
-        resp.setContentType("text/html");
-        if (user != null) {
-            resp.addCookie(new Cookie("user", user.getCookie()));
-            req.getRequestDispatcher("/calculator/profile.jsp").forward(req, resp);
+        if (!authorizationHeaderData.hasMoreElements() && login != null && password != null) {
+            User user = getUser(login, password);
+            resp.setContentType("text/html");
+            if (user != null) {
+                resp.addCookie(new Cookie("user", user.getCookie()));
+                req.getRequestDispatcher("/calculator/profile.jsp").forward(req, resp);
+            } else {
+                resp.setHeader("Result", "user_not_found");
+                req.getRequestDispatcher("/calculator/sign_in.jsp").forward(req, resp);
+            }
         } else {
-            resp.setHeader("result", "User not found!");
+            resp.setHeader("Result", "wrong_parameters_number");
             req.getRequestDispatcher("/calculator/sign_in.jsp").forward(req, resp);
         }
     }

@@ -20,7 +20,7 @@ class Calculator {
             if (xmlHttp.readyState === XMLHttpRequest.DONE) {
                 let status = xmlHttp.status;
                 if (status >= 200 && status < 300) {
-                    let response = xmlHttp.getResponseHeader("result");
+                    let response = xmlHttp.getResponseHeader("Result");
                     if (isNaN(response)) {
                         alert(response);
                         document.getElementById("display").value = "";
@@ -35,15 +35,15 @@ class Calculator {
     }
 
     static readCookie(name) {
-        let name_cook = name + "=";
+        let name_cookie = name + "=";
         let spl = document.cookie.split(";");
         for (let i = 0; i < spl.length; i++) {
             let c = spl[i];
             while (c.charAt(0) === " ") {
                 c = c.substring(1, c.length);
             }
-            if (c.indexOf(name_cook) === 0) {
-                return c.substring(name_cook.length, c.length);
+            if (c.indexOf(name_cookie) === 0) {
+                return c.substring(name_cookie.length, c.length);
             }
         }
         return null;
