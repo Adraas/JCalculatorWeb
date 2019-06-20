@@ -7,7 +7,7 @@ import ru.wkn.entities.EntityType;
 import ru.wkn.entities.Operation;
 import ru.wkn.repository.dao.DaoType;
 
-import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +20,13 @@ public class CalculatorServlet extends HttpServlet {
     private static Map<String, Operation> cookieOperationMap = new HashMap<>();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String cookie = req.getParameter("cookie");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Cookie[] cookies = req.getCookies();
+        int i = 0;
+        while (!cookies[i].getName().equals("user")) {
+            i++;
+        }
+        String cookie = cookies[i].getValue();
         Operation operation = getOperationByCookie(cookie);
 
         char symbol = req.getParameter("symbol").toCharArray()[0];
@@ -32,7 +37,7 @@ public class CalculatorServlet extends HttpServlet {
 
         if (symbol == 'C') {
             calculatorExpressionCompiler.allClear();
-            resp.setHeader("Result", "0");
+            resp.getWriter().println(0);
         } else {
             updateCalculatorExpressionCompilerState(calculatorExpressionCompiler, operation);
             String result = calculatorExpressionCompiler.getCurrentAnswerAsString(symbol);
@@ -41,12 +46,11 @@ public class CalculatorServlet extends HttpServlet {
                 operation.setOperationResult(result);
                 isSaved = saveOperation(operation);
             }
-            resp.setHeader("Result", result);
+            resp.getWriter().println(result);
             if (isSaved) {
-                resp.sendError(412, "Operation not created!");
+                resp.sendError(500, "Operation not created");
             }
         }
-        req.getRequestDispatcher("/calculator/calculator.jsp").forward(req, resp);
     }
 
     private Operation getOperationByCookie(String cookie) {
@@ -65,6 +69,7 @@ public class CalculatorServlet extends HttpServlet {
         }
     }
 
+    @SuppressWarnings(value = {"unchecked"})
     private boolean saveOperation(Operation operation) {
         cookieOperationMap.remove(operation.getCookie());
         RepositoryFacade repositoryFacade = new RepositoryFacade(DaoType.H2DAO, EntityType.OPERATION);

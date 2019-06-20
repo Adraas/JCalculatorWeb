@@ -3,24 +3,24 @@ class Calculator {
     static roundingAccuracy = 1;
 
     static setRange(roundingAccuracyElement) {
-        this.roundingAccuracy = document.getElementById(roundingAccuracyElement).value;
+        Calculator.roundingAccuracy = document.getElementById(roundingAccuracyElement).value;
     }
 
     static postRequestToCalculator(symbol) {
-        let userCookie = this.readCookie("name");
-        let roundingAccuracy = this.roundingAccuracy;
+        let userCookie = Calculator.readCookie("name");
+        let roundingAccuracy = Calculator.roundingAccuracy;
         let data = "cookie=" + userCookie + "&rounding_accuracy" + roundingAccuracy + "&symbol=" + symbol;
         let xmlHttp = new XMLHttpRequest();
 
         xmlHttp.open("POST", "/calculator/profile", true);
-        xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        xmlHttp.setRequestHeader("Content-Type", "text/plain; charset=UTF-8");
         xmlHttp.send(data);
 
         xmlHttp.onload = function () {
             if (xmlHttp.readyState === XMLHttpRequest.DONE) {
                 let status = xmlHttp.status;
                 if (status >= 200 && status < 300) {
-                    let response = xmlHttp.getResponseHeader("Result");
+                    let response = xmlHttp.responseText;
                     if (isNaN(response)) {
                         alert(response);
                         document.getElementById("display").value = "";

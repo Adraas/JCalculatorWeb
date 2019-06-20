@@ -10,29 +10,47 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String fullName = req.getParameter("full_name");
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-
-        if (checkStringToValid(fullName, ',', ';', ':')
-                && checkStringToValid(login, ' ', ',', ';', ':')
-                && checkStringToValid(password, ' ', ',', ';', ':')) {
-            boolean isCreated = saveUser(fullName, login, password);
-            if (isCreated) {
-                req.getRequestDispatcher("/calculator/sign_in.jsp").forward(req, resp);
+        BufferedReader bufferedReader = req.getReader();
+        String bodyRequest = "";
+        while (bufferedReader.ready()) {
+            bodyRequest = bodyRequest.concat(bufferedReader.readLine());
+        }
+        String[] inputData = bodyRequest.split("&");
+        if (inputData.length == 3) {
+            String[] nameData = inputData[0].split("=");
+            String[] loginData = inputData[1].split("=");
+            String[] passwordData = inputData[2].split("=");
+            if ((nameData.length == 2 && nameData[0].equals("nickname"))
+                    && (loginData.length == 2 && loginData[0].equals("login"))
+                    && (passwordData.length == 2 && passwordData[0].equals("password"))) {
+                String name = nameData[1];
+                String login = loginData[1];
+                String password = passwordData[1];
+                if (checkStringToValid(name, ',', ';', ':')
+                        && checkStringToValid(login, ' ', ',', ';', ':')
+                        && checkStringToValid(password, ' ', ',', ';', ':')) {
+                    boolean isCreated;
+                    isCreated = saveUser(name, login, password);
+                    if (isCreated) {
+                        req.getRequestDispatcher("/sign_in.jsp").forward(req, resp);
+                    } else {
+                        resp.sendError(400, "User not saved");
+                    }
+                } else {
+                    resp.sendError(400, "Input data contains forbidden symbols");
+                }
             } else {
-                resp.setHeader("Result", "user_not_created");
-                req.getRequestDispatcher("/calculator/sign_up.jsp").forward(req, resp);
+                resp.sendError(400, "Input data contains forbidden symbols");
             }
         } else {
-            resp.setHeader("Result", "parameters_with_forbidden_symbols");
-            req.getRequestDispatcher("/calculator/sign_up.jsp").forward(req, resp);
+            resp.sendError(400, "Missing required input data");
         }
     }
 
@@ -45,11 +63,13 @@ public class SignUpServlet extends HttpServlet {
         return true;
     }
 
-    private boolean saveUser(String fullName, String login, String password) {
-        RepositoryFacade repositoryFacade = new RepositoryFacade(DaoType.H2DAO, EntityType.USER);
-        String cookie = ((UserService) repositoryFacade.getService()).registryCookie(fullName, login, password);
-
-        User user = new User(fullName, login, password, cookie);
+    @SuppressWarnings(value = {"unchecked"})
+    private boolean saveUser(String name, String login, String password) {
+        RepositoryFacade repositoryFacade =
+                new RepositoryFacade(DaoType.H2DAO, EntityType.USER);
+        String cookie = ((UserService) repositoryFacade.getService()).registryCookie(name, login, password);
+        User user = new User(name, login, password, cookie);
         return repositoryFacade.getService().create(user);
     }
+
 }
