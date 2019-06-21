@@ -20,35 +20,39 @@ public class CalculatorServlet extends HttpServlet {
     private static Map<String, Operation> cookieOperationMap = new HashMap<>();
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        doPost(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Cookie[] cookies = req.getCookies();
-        int i = 0;
-        while (!cookies[i].getName().equals("user")) {
-            i++;
-        }
-        String cookie = cookies[i].getValue();
-        Operation operation = getOperationByCookie(cookie);
+        String cookie = getCookie(req);
+        checkCookie(cookie, resp);
 
-        char symbol = req.getParameter("symbol").toCharArray()[0];
-        int roundingAccuracy = Integer.parseInt(req.getParameter("rounding_accuracy"));
+        String symbolParameter = req.getParameter("symbol");
+        if (symbolParameter != null) {
+            char symbol = symbolParameter.toCharArray()[0];
+            int roundingAccuracy = Integer.parseInt(req.getParameter("rounding_accuracy"));
+            Operation operation = getOperationByCookie(cookie);
 
-        CalculatorFacade calculatorFacade = new CalculatorFacade(roundingAccuracy);
-        CalculatorExpressionCompiler calculatorExpressionCompiler = calculatorFacade.getCalculatorExpressionCompiler();
+            CalculatorFacade calculatorFacade = new CalculatorFacade(roundingAccuracy);
+            CalculatorExpressionCompiler calculatorExpressionCompiler = calculatorFacade.getCalculatorExpressionCompiler();
 
-        if (symbol == 'C') {
-            calculatorExpressionCompiler.allClear();
-            resp.getWriter().println(0);
-        } else {
-            updateCalculatorExpressionCompilerState(calculatorExpressionCompiler, operation);
-            String result = calculatorExpressionCompiler.getCurrentAnswerAsString(symbol);
-            boolean isSaved = false;
-            if (operationReady(operation, result)) {
-                operation.setOperationResult(result);
-                isSaved = saveOperation(operation);
-            }
-            resp.getWriter().println(result);
-            if (isSaved) {
-                resp.sendError(500, "Operation not created");
+            if (symbol == 'C') {
+                calculatorExpressionCompiler.allClear();
+                resp.getWriter().println(0);
+            } else {
+                updateCalculatorExpressionCompilerState(calculatorExpressionCompiler, operation);
+                String result = calculatorExpressionCompiler.getCurrentAnswerAsString(symbol);
+                boolean isSaved = false;
+                if (operationReady(operation, result)) {
+                    operation.setOperationResult(result);
+                    isSaved = saveOperation(operation);
+                }
+                resp.getWriter().println(result);
+                if (isSaved) {
+                    resp.getWriter().println("Operation not created");
+                }
             }
         }
     }
@@ -78,5 +82,25 @@ public class CalculatorServlet extends HttpServlet {
 
     private boolean operationReady(Operation operation, String intermediateResult) {
         return !operation.getOperationContent().contains(intermediateResult);
+    }
+
+    private String getCookie(HttpServletRequest req) {
+        Cookie[] cookies = req.getCookies();
+        int i = 0;
+        while (!cookies[i].getName().equals("user")) {
+            i++;
+        }
+        Cookie cookie = cookies[i];
+        if (!cookie.getName().equals("user")) {
+            return null;
+        } else {
+            return cookie.getValue();
+        }
+    }
+
+    private void checkCookie(String cookie, HttpServletResponse resp) throws IOException {
+        if (cookie == null) {
+            resp.sendRedirect("sign_in");
+        }
     }
 }

@@ -17,7 +17,7 @@ import java.util.Base64;
 public class SignInServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String authorizationEncodingData = req.getHeader("Authorization");
         authorizationEncodingData = authorizationEncodingData.split("Basic ")[1];
         authorizationEncodingData = new String(Base64.getDecoder().decode(authorizationEncodingData));
@@ -30,9 +30,9 @@ public class SignInServlet extends HttpServlet {
             user = getUser(login, password);
             if (user != null) {
                 resp.addCookie(new Cookie("user", user.getCookie()));
-                req.getRequestDispatcher("/calculator.jsp").forward(req, resp);
+                req.getRequestDispatcher("profile").forward(req, resp);
             } else {
-                resp.sendError(400, "Wrong email or password");
+                resp.getWriter().println("Wrong email or password");
             }
         } else {
             resp.sendError(400, "Wrong input data");

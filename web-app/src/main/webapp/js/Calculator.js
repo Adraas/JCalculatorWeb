@@ -11,27 +11,20 @@ class Calculator {
         let roundingAccuracy = Calculator.roundingAccuracy;
         let data = "cookie=" + userCookie + "&rounding_accuracy" + roundingAccuracy + "&symbol=" + symbol;
         let xmlHttp = new XMLHttpRequest();
-
-        xmlHttp.open("POST", "/calculator/profile", true);
-        xmlHttp.setRequestHeader("Content-Type", "text/plain; charset=UTF-8");
-        xmlHttp.send(data);
-
         xmlHttp.onload = function () {
-            if (xmlHttp.readyState === XMLHttpRequest.DONE) {
-                let status = xmlHttp.status;
-                if (status >= 200 && status < 300) {
-                    let response = xmlHttp.responseText;
-                    if (isNaN(response)) {
-                        alert(response);
-                        document.getElementById("display").value = "";
-                    } else {
-                        document.getElementById("display").value = response;
-                    }
+            let response = xmlHttp.responseText;
+            if (response.trim() !== "") {
+                if (isNaN(response)) {
+                    alert(response);
+                    document.getElementById("display").value = "";
                 } else {
-                    alert(String(status).concat(": ", xmlHttp.statusText));
+                    document.getElementById("display").value = response;
                 }
             }
         };
+        xmlHttp.open("POST", "profile", true);
+        xmlHttp.setRequestHeader("Content-Type", "text/plain; charset=UTF-8");
+        xmlHttp.send(data);
     }
 
     static readCookie(name) {

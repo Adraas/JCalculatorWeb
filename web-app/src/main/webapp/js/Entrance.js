@@ -5,19 +5,19 @@ class Entrance {
             let login = document.getElementById(loginElement);
             let password = document.getElementById(passwordElement);
             let data = "Basic " + btoa(login.value + ", " + password.value);
-            Entrance.doRequest(data, "Authorization", "/calculator/sign_in", "POST");
+            Entrance.doRequest(data, "Authorization", "sign_in", "GET");
         } else {
             alert("Проверьте данные!")
         }
     }
 
-    static signUp(fullNameElement, loginElement, passwordElement) {
+    static signUp(nicknameElement, loginElement, passwordElement) {
         if (this.isCorrect([loginElement, passwordElement])) {
-            let fullName = document.getElementById(fullNameElement);
+            let nickname = document.getElementById(nicknameElement);
             let login = document.getElementById(loginElement);
             let password = document.getElementById(passwordElement);
-            let data = "full_name=" + fullName.value + "&login=" + login.value + "&password=" + password.value;
-            Entrance.doRequest(data, null, "/calculator/sign_up", "POST");
+            let data = "nickname=" + nickname.value + "&login=" + login.value + "&password=" + password.value;
+            Entrance.doRequest(data, null, "sign_up", "POST");
         } else {
             alert("Проверьте данные!")
         }
@@ -25,7 +25,34 @@ class Entrance {
 
     static doRequest(data, header, URL, requestType) {
         let xmlHttp = new XMLHttpRequest();
-        xmlHttp.open(requestType, URL, true);
+        let xmlHttpUpload = xmlHttp.upload;
+        xmlHttpUpload.onprogress = function () {
+        };
+        xmlHttp.onload = function () {
+            let response = xmlHttp.responseText;
+            if (response.trim() !== "") {
+                if (!response.startsWith("<!")) {
+                    alert(response);
+                } else {
+                    window.document.writeln(response);
+                }
+            } else {
+                let status = xmlHttp.status;
+                if (status === 200) {
+                    let currentURL = window.document.location.href;
+                    if (!currentURL.endsWith("/")) {
+                        currentURL = currentURL + "/";
+                    }
+                    if (currentURL.endsWith("sign_in.jsp/")) {
+                        currentURL = currentURL.match(new RegExp("(^sign_in\\.jsp/)*")).groups[0];
+                        currentURL = currentURL + "/";
+                    }
+                    let newRelativeURL = "profile";
+                    window.document.location.replace(currentURL + newRelativeURL);
+                }
+            }
+        };
+        xmlHttp.open(requestType, URL, false);
         xmlHttp.setRequestHeader("Content-Type", "text/plain; charset=UTF-8");
         if (header == null) {
             xmlHttp.send(data);
@@ -33,13 +60,6 @@ class Entrance {
             xmlHttp.setRequestHeader(header, data);
             xmlHttp.send();
         }
-
-        xmlHttp.onload = function () {
-            let result = xmlHttp.responseText;
-            if (result != null && result !== "") {
-                alert(result);
-            }
-        };
     }
 
     static isCorrect(elements) {

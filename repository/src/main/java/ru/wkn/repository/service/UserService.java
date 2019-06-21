@@ -4,8 +4,8 @@ import ru.wkn.entities.User;
 import ru.wkn.repository.dao.IDao;
 import ru.wkn.repository.dao.h2.UserH2Dao;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class UserService extends Service<User, Integer> {
 
@@ -18,17 +18,12 @@ public class UserService extends Service<User, Integer> {
     }
 
     public String registryCookie(String fullName, String login, String password) {
-        byte[] startMessage = fullName.concat(login).concat(password).getBytes();
-        String codedMessage;
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            codedMessage = new String(messageDigest.digest(startMessage));
-            while (((UserH2Dao) super.getDao()).isExistCookie(codedMessage)) {
-                codedMessage = new String(messageDigest.digest(codedMessage.getBytes()));
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+        byte[] startMessage = fullName.concat(login).concat(password).getBytes(StandardCharsets.UTF_8);
+        Base64.Encoder encoder = Base64.getEncoder();
+        String codedMessage = new String(encoder.encode(startMessage));
+        while (((UserH2Dao) super.getDao()).isExistCookie(codedMessage)) {
+            codedMessage = new String(encoder.encode(codedMessage.getBytes(StandardCharsets.UTF_8)));
         }
-        return null;
+        return codedMessage;
     }
 }
