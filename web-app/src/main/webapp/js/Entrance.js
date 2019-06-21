@@ -36,20 +36,6 @@ class Entrance {
                 } else {
                     window.document.writeln(response);
                 }
-            } else {
-                let status = xmlHttp.status;
-                if (status === 200) {
-                    let currentURL = window.document.location.href;
-                    if (!currentURL.endsWith("/")) {
-                        currentURL = currentURL + "/";
-                    }
-                    if (currentURL.endsWith("sign_in.jsp/")) {
-                        currentURL = currentURL.match(new RegExp("(^sign_in\\.jsp/)*")).groups[0];
-                        currentURL = currentURL + "/";
-                    }
-                    let newRelativeURL = "profile";
-                    window.document.location.replace(currentURL + newRelativeURL);
-                }
             }
         };
         xmlHttp.open(requestType, URL, false);

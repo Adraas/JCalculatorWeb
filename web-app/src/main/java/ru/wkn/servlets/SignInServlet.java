@@ -6,7 +6,6 @@ import ru.wkn.entities.User;
 import ru.wkn.repository.dao.DaoType;
 import ru.wkn.repository.service.UserService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ import java.util.Base64;
 public class SignInServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String authorizationEncodingData = req.getHeader("Authorization");
         authorizationEncodingData = authorizationEncodingData.split("Basic ")[1];
         authorizationEncodingData = new String(Base64.getDecoder().decode(authorizationEncodingData));
@@ -30,7 +29,7 @@ public class SignInServlet extends HttpServlet {
             user = getUser(login, password);
             if (user != null) {
                 resp.addCookie(new Cookie("user", user.getCookie()));
-                req.getRequestDispatcher("profile").forward(req, resp);
+                resp.sendRedirect("profile");
             } else {
                 resp.getWriter().println("Wrong email or password");
             }
