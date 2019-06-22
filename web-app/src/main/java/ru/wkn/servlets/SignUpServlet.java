@@ -39,7 +39,7 @@ public class SignUpServlet extends HttpServlet {
                     boolean isCreated;
                     isCreated = saveUser(name, login, password);
                     if (isCreated) {
-                        req.getRequestDispatcher("/sign_in.jsp").forward(req, resp);
+                        req.getRequestDispatcher("sign_in").forward(req, resp);
                     } else {
                         resp.getWriter().println("User not saved");
                     }
