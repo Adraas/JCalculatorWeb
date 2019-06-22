@@ -6,7 +6,6 @@ import ru.wkn.entities.User;
 import ru.wkn.repository.dao.DaoType;
 import ru.wkn.repository.service.UserService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,7 @@ import java.io.IOException;
 public class SignUpServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         BufferedReader bufferedReader = req.getReader();
         String bodyRequest = "";
         while (bufferedReader.ready()) {
@@ -39,7 +38,7 @@ public class SignUpServlet extends HttpServlet {
                     boolean isCreated;
                     isCreated = saveUser(name, login, password);
                     if (isCreated) {
-                        req.getRequestDispatcher("sign_in").forward(req, resp);
+                        resp.sendRedirect("sign_in");
                     } else {
                         resp.getWriter().println("User not saved");
                     }
