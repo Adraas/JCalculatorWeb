@@ -41,16 +41,16 @@ public class SignUpServlet extends HttpServlet {
                     if (isCreated) {
                         req.getRequestDispatcher("/sign_in.jsp").forward(req, resp);
                     } else {
-                        resp.sendError(400, "User not saved");
+                        resp.getWriter().println("User not saved");
                     }
                 } else {
-                    resp.sendError(400, "Input data contains forbidden symbols");
+                    resp.getWriter().println("Input data contains forbidden symbols");
                 }
             } else {
-                resp.sendError(400, "Input data contains forbidden symbols");
+                resp.getWriter().println("Input data contains forbidden symbols");
             }
         } else {
-            resp.sendError(400, "Missing required input data");
+            resp.getWriter().println("Missing required input data");
         }
     }
 
