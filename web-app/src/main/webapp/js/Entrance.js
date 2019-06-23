@@ -26,17 +26,18 @@ class Entrance {
     static doRequest(data, header, URL, requestType) {
         let xmlHttp = new XMLHttpRequest();
         let xmlHttpUpload = xmlHttp.upload;
-        xmlHttpUpload.onprogress = function (event) {
-            let bar = new ProgressBar.Circle('#circle-container', {
+        xmlHttpUpload.onprogress = function () {
+            let statusBarContainer = document.querySelector("#status-bar-container");
+            let bar = new ProgressBar.Circle(statusBarContainer, {
                 strokeWidth: 6,
                 easing: 'easeInOut',
-                duration: event.total,
+                duration: 20000,
                 color: '#FFEA82',
                 trailColor: '#eee',
-                trailWidth: 1,
-                svgStyle: null
+                trailWidth: 1
             });
-            bar.animate(event.loaded);
+            statusBarContainer.style.visibility = 'visible';
+            bar.animate(1);
         };
         xmlHttp.onload = function () {
             let response = xmlHttp.responseText;

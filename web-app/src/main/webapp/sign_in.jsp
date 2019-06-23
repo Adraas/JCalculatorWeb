@@ -7,6 +7,7 @@
     <title>Авторизация</title>
 </head>
 <body>
+<div id="status-bar-container" hidden></div>
 <div class="form-wrap">
     <div class="profile"><img src="fonts/minimal-poster-design-avatar.png" alt="Minimal poster design avatar">
         <h1>Авторизация</h1>
