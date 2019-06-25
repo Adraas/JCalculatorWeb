@@ -12,13 +12,17 @@ class Calculator {
         let data = "cookie=" + userCookie + "&rounding_accuracy" + roundingAccuracy + "&symbol=" + symbol;
         let xmlHttp = new XMLHttpRequest();
         xmlHttp.onload = function () {
-            let response = xmlHttp.responseText;
-            if (response.trim() !== "") {
-                if (isNaN(response)) {
-                    alert(response);
-                    document.getElementById("display").value = "";
-                } else {
-                    document.getElementById("display").value = response;
+            if (xmlHttp.status >= 400) {
+                window.open().document.writeln(xmlHttp.statusText);
+            } else {
+                let response = xmlHttp.responseText;
+                if (response.trim() !== "") {
+                    if (isNaN(response)) {
+                        alert(response);
+                        document.getElementById("display").value = "";
+                    } else {
+                        document.getElementById("display").value = response;
+                    }
                 }
             }
         };
