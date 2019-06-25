@@ -20,11 +20,6 @@ public class CalculatorServlet extends HttpServlet {
     private static Map<String, Operation> cookieOperationMap = new HashMap<>();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        doPost(req, resp);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String cookie = getCookie(req);
         checkCookie(cookie, resp);
@@ -87,20 +82,24 @@ public class CalculatorServlet extends HttpServlet {
     private String getCookie(HttpServletRequest req) {
         Cookie[] cookies = req.getCookies();
         int i = 0;
-        while (!cookies[i].getName().equals("user")) {
-            i++;
-        }
-        Cookie cookie = cookies[i];
-        if (!cookie.getName().equals("user")) {
-            return null;
+        if (cookies.length > 0) {
+            while (i < cookies.length - 1 && !cookies[i].getName().equals("user")) {
+                i++;
+            }
+            Cookie cookie = cookies[i];
+            if (!cookie.getName().equals("user")) {
+                return null;
+            } else {
+                return cookie.getValue();
+            }
         } else {
-            return cookie.getValue();
+            return null;
         }
     }
 
     private void checkCookie(String cookie, HttpServletResponse resp) throws IOException {
         if (cookie == null) {
-            resp.sendRedirect("sign_in");
+            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 }

@@ -37,9 +37,7 @@ public class SignUpServlet extends HttpServlet {
                         && checkStringToValid(password, ' ', ',', ';', ':')) {
                     boolean isCreated;
                     isCreated = saveUser(name, login, password);
-                    if (isCreated) {
-                        resp.sendRedirect("sign_in");
-                    } else {
+                    if (!isCreated) {
                         resp.getWriter().println("User not saved");
                     }
                 } else {
