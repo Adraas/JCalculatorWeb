@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/calculator.css"/>
-    <script rel="script" type="text/javascript" src="js/Calculator.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/calculator.css"/>
+    <script rel="script" type="text/javascript" src="../js/Calculator.js"></script>
     <title>Калькулятор</title>
 </head>
 <body>
@@ -49,7 +49,7 @@
             </td>
         </tr>
     </table>
-    <p align="center"><a href='sign_in.jsp'>Выход</a></p>
+    <p align="center"><a href='../sign_in.jsp'>Выход</a></p>
 </form>
 </body>
 </html>

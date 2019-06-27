@@ -12,16 +12,16 @@
     <div class="profile"><img src="fonts/minimal-poster-design-avatar.png" alt="Minimal poster design avatar">
         <h1>Авторизация</h1>
     </div>
-    <form>
+    <form method="get" action="${pageContext.request.contextPath}/sign_in">
         <p>
         <div>
             <label for="login">Логин</label>
-            <input id="login" type="text" required>
+            <input id="login" type="text" name="j_username" required>
         </div>
         <p>
         <div>
             <label for="password">Пароль</label>
-            <input id="password" type="password" required>
+            <input id="password" type="password" name="j_password" required>
         </div>
         <button onclick="Entrance.signIn('login', 'password')">Вход</button>
         <p align="center"><a href="sign_up.jsp">Регистрация</a>

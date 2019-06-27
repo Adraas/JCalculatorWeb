@@ -6,8 +6,8 @@ import ru.wkn.calculator.CalculatorFacade;
 import ru.wkn.entities.EntityType;
 import ru.wkn.entities.Operation;
 import ru.wkn.repository.dao.DaoType;
+import ru.wkn.util.CookieManager;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +21,7 @@ public class CalculatorServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String cookie = getCookie(req);
-        checkCookie(cookie, resp);
+        String cookie = CookieManager.getCookie(req);
 
         String symbolParameter = req.getParameter("symbol");
         if (symbolParameter != null) {
@@ -77,29 +76,5 @@ public class CalculatorServlet extends HttpServlet {
 
     private boolean operationReady(Operation operation, String intermediateResult) {
         return !operation.getOperationContent().contains(intermediateResult);
-    }
-
-    private String getCookie(HttpServletRequest req) {
-        Cookie[] cookies = req.getCookies();
-        int i = 0;
-        if (cookies.length > 0) {
-            while (i < cookies.length - 1 && !cookies[i].getName().equals("user")) {
-                i++;
-            }
-            Cookie cookie = cookies[i];
-            if (!cookie.getName().equals("user")) {
-                return null;
-            } else {
-                return cookie.getValue();
-            }
-        } else {
-            return null;
-        }
-    }
-
-    private void checkCookie(String cookie, HttpServletResponse resp) throws IOException {
-        if (cookie == null) {
-            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-        }
     }
 }

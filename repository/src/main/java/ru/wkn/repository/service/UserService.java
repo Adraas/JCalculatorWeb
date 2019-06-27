@@ -26,4 +26,8 @@ public class UserService extends Service<User, Integer> {
         }
         return codedMessage;
     }
+
+    public boolean checkCookieToExist(String cookie) {
+        return ((UserH2Dao) super.getDao()).isExistCookie(cookie);
+    }
 }

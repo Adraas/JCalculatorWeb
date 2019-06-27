@@ -14,28 +14,27 @@
 
     <welcome-file-list>
         <welcome-file>sign_in.jsp</welcome-file>
-        <welcome-file>sign_up.jsp</welcome-file>
     </welcome-file-list>
 
     <servlet>
-        <display-name>sign_in</display-name>
-        <servlet-name>sign_in</servlet-name>
+        <display-name>sign-in</display-name>
+        <servlet-name>sign-in</servlet-name>
         <servlet-class>ru.wkn.servlets.SignInServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>sign_in</servlet-name>
+        <servlet-name>sign-in</servlet-name>
         <url-pattern>/sign_in</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <display-name>sign_up</display-name>
-        <servlet-name>sign_up</servlet-name>
+        <display-name>sign-up</display-name>
+        <servlet-name>sign-up</servlet-name>
         <servlet-class>ru.wkn.servlets.SignUpServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>sign_up</servlet-name>
+        <servlet-name>sign-up</servlet-name>
         <url-pattern>/sign_up</url-pattern>
     </servlet-mapping>
 
@@ -49,4 +48,15 @@
         <servlet-name>calculator</servlet-name>
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>security-filter</filter-name>
+        <filter-class>ru.wkn.filters.SecurityProfileFilter</filter-class>
+        <async-supported>false</async-supported>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>security-filter</filter-name>
+        <url-pattern>/secured/*</url-pattern>
+    </filter-mapping>
 </web-app>

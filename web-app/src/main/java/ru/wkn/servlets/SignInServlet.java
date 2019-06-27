@@ -5,6 +5,7 @@ import ru.wkn.entities.EntityType;
 import ru.wkn.entities.User;
 import ru.wkn.repository.dao.DaoType;
 import ru.wkn.repository.service.UserService;
+import ru.wkn.util.CookieManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -29,10 +30,10 @@ public class SignInServlet extends HttpServlet {
             User user;
             user = getUser(login, password);
             if (user != null) {
-                resp.addCookie(new Cookie("user", user.getCookie()));
-                req.getRequestDispatcher("/calculator.jsp").forward(req, resp);
+                resp.addCookie(new Cookie(CookieManager.getCookieName(), user.getCookie()));
+                req.getRequestDispatcher("/secured/calculator.jsp").forward(req, resp);
             } else {
-                resp.getWriter().println("Wrong email or password");
+                req.getRequestDispatcher("/sign_in.jsp").forward(req, resp);
             }
         } else {
             resp.sendError(400, "Wrong input data");
