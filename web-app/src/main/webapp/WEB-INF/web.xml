@@ -39,14 +39,14 @@
     </servlet-mapping>
 
     <servlet>
-        <display-name>profile</display-name>
+        <display-name>calculator</display-name>
         <servlet-name>calculator</servlet-name>
         <servlet-class>ru.wkn.servlets.CalculatorServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>calculator</servlet-name>
-        <url-pattern>/profile</url-pattern>
+        <url-pattern>/secured/calculator</url-pattern>
     </servlet-mapping>
 
     <filter>

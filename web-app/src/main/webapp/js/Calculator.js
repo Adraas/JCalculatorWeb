@@ -12,8 +12,14 @@ class Calculator {
         let data = "cookie=" + userCookie + "&rounding_accuracy" + roundingAccuracy + "&symbol=" + symbol;
         let xmlHttp = new XMLHttpRequest();
         xmlHttp.onload = function () {
-            if (xmlHttp.status >= 400) {
-                window.open().document.writeln(xmlHttp.statusText);
+            let status = xmlHttp.status;
+            if (status >= 400) {
+                let statusText = xmlHttp.statusText;
+                if (statusText != null && statusText.trim() !== "") {
+                    window.open("", "Error").document.writeln(statusText);
+                } else {
+                    window.open("", "Error").document.writeln("Status code: " + String(status));
+                }
             } else {
                 let response = xmlHttp.responseText;
                 if (response.trim() !== "") {
@@ -26,7 +32,7 @@ class Calculator {
                 }
             }
         };
-        xmlHttp.open("POST", "profile", true);
+        xmlHttp.open("POST", "/secured/calculator", true);
         xmlHttp.setRequestHeader("Content-Type", "text/plain; charset=UTF-8");
         xmlHttp.send(data);
     }

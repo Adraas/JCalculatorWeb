@@ -33,7 +33,7 @@ class Entrance {
         xmlHttp.onload = function () {
             let status = xmlHttp.status;
             if (status >= 400) {
-                window.open().document.writeln(xmlHttp.statusText);
+                window.open("", "Error").document.writeln(xmlHttp.statusText);
             } else {
                 if (status >= 200 && status < 300) {
                     window.document.close();
