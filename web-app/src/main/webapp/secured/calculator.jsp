@@ -11,7 +11,7 @@
     <table class="main">
         <tr class="display">
             <td colspan="4"><label>
-                <input id="display" type="text" contenteditable="false">
+                <input id="display" type="text" value="0" readonly>
             </label></td>
         </tr>
         <tr class="buttons">
