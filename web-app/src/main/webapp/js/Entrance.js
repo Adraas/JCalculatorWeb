@@ -36,8 +36,8 @@ class Entrance {
                 window.open("", "Error").document.writeln(xmlHttp.statusText);
             } else {
                 if (status >= 200 && status < 300) {
-                    window.document.close();
-                    window.open().window.document.writeln(xmlHttp.responseText);
+                    window.close();
+                    window.open().document.writeln(xmlHttp.responseText);
                 } else {
                     let response = xmlHttp.responseText;
                     if (response.trim() !== "") {
